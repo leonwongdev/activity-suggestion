@@ -22,10 +22,10 @@ app.get("/", async (req, res) => {
 });
 
 // Endpoint to get a random activity
-app.post("/activity", async (req, res) => {
-  const participants = req.body.participants;
-  const type = req.body.type;
-  const activityPayload = await getActivityAsync(participants, type);
+app.get("/activity", async (req, res) => {
+  // Get activity type from query param
+  const type = req.query.type;
+  const activityPayload = await getActivityAsync(type);
 
   if (activityPayload == null) {
     res.render("error", "Error fetching activity, please contact admin");
@@ -36,22 +36,16 @@ app.post("/activity", async (req, res) => {
     "How to" + activityPayload.activity
   );
   console.log(new Date(), "activityPayload", activityPayload);
-  if (participants != activityPayload.participants) {
-    const message =
-      "There is no activity for the selected number of participants, here is a random activity:";
-    res.render("activity", { activityPayload, videoData, message });
-    return;
-  } else {
-    res.render("activity", { activityPayload, videoData, message: null });
-    return;
-  }
+
+  res.render("activity", { activityPayload, videoData, message: null });
+  return;
 });
 
 app.listen(port, () => {
   console.log(`App listening on port http://localhost:${port}`);
 });
 
-async function getActivityAsync(participants, type) {
+async function getActivityAsync(type) {
   // Sample Response
   // {
   // 	"activity": "Learn Express.js",
@@ -63,28 +57,11 @@ async function getActivityAsync(participants, type) {
   // 	"key": "3943506"
   // }
   try {
-    const reqUrl = `https://www.boredapi.com/api/activity?participants=${participants}&type=${type}`;
+    const reqUrl = `https://www.boredapi.com/api/activity?type=${type}`;
     console.log(new Date(), reqUrl);
     const response = await fetch(reqUrl);
     const activity = await response.json();
     console.log("Activity retrieved successfully", activity);
-    if (activity.error != null) {
-      // fall back to random activity without any filters
-      const reqUrl = `https://www.boredapi.com/api/activity`;
-      console.log(
-        "Fall back to random activity without filter",
-        new Date(),
-        reqUrl
-      );
-      try {
-        const response = await fetch(reqUrl);
-        const activity = await response.json();
-        return activity;
-      } catch (error) {
-        console.error(new Date(), error);
-        return null;
-      }
-    }
     return activity;
   } catch (error) {
     console.error(new Date(), error);
