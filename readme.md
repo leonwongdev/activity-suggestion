@@ -1,19 +1,48 @@
-# Project Title
+# Activity Suggester
 
-This is a assignment for HTTP5222.
+This is a Node.js application that suggests random activities to the user. It uses the Bored API to fetch activities and the YouTube API to fetch related videos.
 
-## Images Used
+## Getting Started
 
-The following images have been used in this project:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-1. **Listing card image**: This image is used in the image on listing card. 
-  - Source: [Unsplash](https://unsplash.com/photos/a-balcony-with-a-table-chairs-and-a-couch-WvP7bpgdkYM)
+### Prerequisites
 
-2. **Toronto icon**: This image is used in the icon of nav bar.
-  - Source: [icon8](https://icons8.com/icon/nLfwA6iNMI1p/toronto)
+- Node.js
+- npm
 
-3. **Toronto skyline**: This image is used in background of the homepage hero section.
-  - Source: [Unsplash](https://unsplash.com/photos/gray-buildings-near-body-of-water-in-aerial-photo-AhmLdXl_azU)   
-  
-4. **Toronto night view**: This image is used in background of the listing page
-  - Source: [Unsplash](https://unsplash.com/photos/cityscape-at-night-stime-AxGByUaoz_o)   
+### Installing
+
+1. Clone the repository
+
+```sh
+git clone git@github.com:leonwongdev/activity-suggestion.git
+```
+
+2. Install dependencies
+
+```
+npm install
+```
+
+3. Start the server
+
+```
+npm run dev
+```
+
+The server will start on http://localhost:3000.
+
+**Project Structure**
+
+- `api/` - Contains the API calls to the Bored API and YouTube API.
+- `public/` - Contains static files like CSS and JavaScript files.
+- `views/` - Contains EJS view templates.
+- `index.js` - The main server file.
+
+**Built With**
+
+- Node.js
+- Express
+- EJS
+- Bootstrap
