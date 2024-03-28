@@ -1,4 +1,4 @@
-const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY;
+const YOUTUBE_API_KEY = "AIzaSyDYKDZOv2ezo41bC2CyVFS8c4naoI2Ldy0";
 async function getActivityAsync(type) {
   // Sample Response
   // {
